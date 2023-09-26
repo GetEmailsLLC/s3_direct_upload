@@ -9,6 +9,12 @@ module S3DirectUpload
       end
     end
 
+    alias_method :s3_uploader, :s3_uploader_form
+
+    def s3_uploader_url ssl = true
+      S3DirectUpload.config.url || "http#{ssl ? 's' : ''}://#{S3DirectUpload.config.bucket}/s3.amazonaws.com/"
+    end
+  
     class S3Uploader
       def initialize(options)
         @key_starts_with = options[:key_starts_with] || "uploads/"
@@ -35,7 +41,7 @@ module S3DirectUpload
         if @options[:region] == "us-east-1"
           "#{@options[:bucket]}.s3.amazonaws.com"
         else
-          "#{@options[:bucket]}.s3-#{@options[:region]}.amazonaws.com"
+          "#{@options[:bucket]}.s3.amazonaws.com"
         end
       end
 

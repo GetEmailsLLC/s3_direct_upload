@@ -12,7 +12,7 @@ module S3DirectUpload
     alias_method :s3_uploader, :s3_uploader_form
 
     def s3_uploader_url ssl = true
-      S3DirectUpload.config.url || "http#{ssl ? 's' : ''}://#{S3DirectUpload.config.bucket}/s3.amazonaws.com/"
+      S3DirectUpload.config.url || "http#{ssl ? 's' : ''}://#{S3DirectUpload.config.bucket}.s3.amazonaws.com/"
     end
   
     class S3Uploader
